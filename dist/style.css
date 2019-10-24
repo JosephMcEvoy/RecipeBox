@@ -1,0 +1,132 @@
+body {
+  color: #405959;
+  font-family: 'Hind', sans-serif;
+  background: rgba(4, 190, 190, 0.33);
+  background: linear-gradient(rgba(4, 190, 190, 0.33), rgba(4, 190, 190, 0.5), rgba(4, 190, 190, 0.33));
+}
+
+a, a:visited {
+  color: rgba(104, 140, 146, 0.75);
+  text-decoration: none;
+}
+a:hover, a:visited:hover {
+  color: #405959;
+}
+a:active, a:visited:active {
+  color: #405959;
+}
+
+h1 {
+  font-size: 25px;
+  color: #405959;
+}
+
+h3 {
+  color: #405959;
+}
+
+.header {
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  padding: 10em 0 0 0;
+}
+
+.recipe-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.recipe {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  max-width: 250px;
+  background-color: rgba(185, 213, 218, 0.75);
+  border-radius: 5px;
+  margin: .5em;
+  word-wrap: break-word;
+  padding: 0;
+  box-shadow: 2px 2px 2px #888888;
+}
+.recipe:hover {
+  background-color: #b9d5da;
+  box-shadow: 5px 5px 5px #888888;
+}
+
+.recipe-inner {
+  padding: 0 1em 0 1em;
+  flex-grow: 1;
+}
+
+.ingredient {
+  font-size: 1em;
+}
+
+.btn-box {
+  display: flex;
+}
+
+.btn-edit {
+  border-radius: 0 0 0 5px;
+}
+
+.btn-remove {
+  border-radius: 0 0 5px 0;
+}
+
+.btn-remove, .btn-edit, .btn-add {
+  background-color: rgba(104, 140, 146, 0.75);
+  font-family: Arial;
+  color: #405959;
+  font-size: 1em;
+  text-align: center;
+  width: 100%;
+  padding: 0.5em 0 0.5em 0;
+  border: 0;
+}
+.btn-remove:hover, .btn-edit:hover, .btn-add:hover {
+  background-color: #688c92;
+  cursor: pointer;
+}
+
+.recipe-add {
+  word-wrap: break-word;
+  text-align: center;
+  box-shadow: 2px 2px 2px #888888;
+}
+.recipe-add:hover {
+  box-shadow: 5px 5px 5px #888888;
+  background-color: #b9d5da;
+}
+.recipe-add textarea {
+  resize: none;
+  -ms-overflow-style: none;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+}
+
+.add-name {
+  margin-top: 1em;
+  width: 95%;
+}
+
+.add-ingredients {
+  flex-grow: 1;
+  height: 149px;
+  width: 95%;
+  margin-bottom: .5em;
+}
+
+.btn-add {
+  border-radius: 0 0 5px 5px;
+}

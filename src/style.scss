@@ -1,0 +1,143 @@
+//Color pallette
+$button: hsla(189, 17%, 49%, .75);
+$button-hover: hsla(189, 17%, 49%, 1);
+$recipe: hsla(189, 30%, 79%, .75);
+$recipe-hover: hsla(189, 30%, 79%, 1);
+$background: hsla(180, 96%, 38%, 0.33);
+$background-gradient: hsla(180, 96%, 38%, .50);
+$text: hsla(180, 16%, 30%, 1);
+$btn-edit-active: hsla(100, 16%, 30%, 1);
+    
+//Link stuff
+$a-tags: 'a, a:visited';
+
+body {
+    color: $text;
+    font-family: 'Hind', sans-serif;
+    background: $background;
+    background: linear-gradient($background, $background-gradient, $background)
+}
+
+//url attributes
+#{$a-tags} {
+    color: $button;
+    text-decoration: none;
+    &:hover {
+        color: $text;
+    }
+    &:active {
+        color: $text;
+    }
+}
+
+h1 {
+    font-size: 25px;
+    color: $text;
+}
+
+h3 {
+    color: $text;
+}
+
+.header {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    padding: 10em 0 0 0;
+}
+
+.recipe-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.recipe {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    max-width: 250px;
+    background-color: $recipe;
+    border-radius: 5px;
+    margin: .5em;
+    word-wrap: break-word;
+    padding: 0;
+    box-shadow: 2px 2px 2px #888888;
+    &:hover {
+        background-color: $recipe-hover;
+        box-shadow: 5px 5px 5px #888888;
+    }
+}
+
+.recipe-inner {
+    padding: 0 1em 0 1em;
+    flex-grow: 1;
+}
+
+.ingredient {
+    font-size: 1em;
+}
+
+.btn-box {
+    display: flex;
+}
+
+.btn-edit {
+    border-radius: 0 0 0 5px;
+}
+
+.btn-remove {
+    border-radius: 0 0 5px 0;
+}
+
+.btn-remove, .btn-edit, .btn-add {
+    background-color: $button;
+    font-family: Arial;
+    color: $text;
+    font-size: 1em;
+    text-align: center;
+    width: 100%;
+    padding: 0.5em 0 0.5em 0;
+    border: 0;
+    &:hover {
+        background-color: $button-hover;
+        cursor: pointer;
+    }
+}
+
+.recipe-add {
+    word-wrap: break-word;
+    text-align: center;
+    box-shadow: 2px 2px 2px #888888;
+    &:hover {
+        box-shadow: 5px 5px 5px #888888;
+        background-color: $recipe-hover;
+    }
+        textarea {
+            resize: none;
+            -ms-overflow-style: none;
+            border-radius: 5px;
+            -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+            -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+            box-sizing: border-box;         /* Opera/IE 8+ */
+    }
+}
+
+.add-name {
+    margin-top: 1em;
+    width: 95%;
+}
+
+.add-ingredients {
+    flex-grow: 1;
+    height: 149px;
+    width: 95%;
+    margin-bottom: .5em;
+}
+
+.btn-add {
+    border-radius: 0 0 5px 5px;
+}

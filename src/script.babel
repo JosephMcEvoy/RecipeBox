@@ -1,0 +1,173 @@
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        if (typeof localStorage["recipeList"] !== "undefined") {
+            this.state = {
+                recipeList: JSON.parse(localStorage["recipeList"])
+            }
+        } else {
+            this.state = {
+                recipeList: []
+            }
+        }
+    }
+    
+    componentDidUpdate(){
+            localStorage.setItem("recipeList", JSON.stringify(this.state.recipeList));
+    }
+    
+    removeRecipe(recipeIndex) {
+        this.setState({
+            recipeList: this.state.recipeList.filter((element, index, array) => array.indexOf(element) !== recipeIndex)
+        });
+    }
+    
+    editRecipe(name, ingredients, recipeIndex) {
+        let newRecipeList = this.state.recipeList.slice(0, recipeIndex)
+                            .concat([{name: name, ingredients: ingredients.split(',')}])
+                            .concat(this.state.recipeList.slice(recipeIndex + 1, this.state.recipeList.length + 1))
+        console.log(newRecipeList);
+        this.setState({
+            recipeList: newRecipeList
+        });
+    }
+    
+    addRecipe(name, ingredients) {
+        if (name !== "" && ingredients !== "") {
+            let newRecipe = {
+                name: name,
+                ingredients: ingredients.split(',')
+            }
+            let newRecipeList = this.state.recipeList;
+            newRecipeList.push(newRecipe);
+            this.setState({
+                recipeList: newRecipeList
+            })
+        }  
+    }
+    render() {
+        return (
+            <div>
+                <Header />
+                <RecipeBox recipeList={this.state.recipeList} removeRecipe={this.removeRecipe.bind(this)} addRecipe={this.addRecipe.bind(this)} editRecipe={this.editRecipe.bind(this)}/>
+                <Footer />
+            </div>
+        )
+    }
+}
+
+class Header extends React.Component {
+    render() {
+        return (
+            <div className="header">
+            <h1>Recipe Box</h1>
+            </div>
+        )
+    }
+}
+
+class RecipeBox extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        return (
+            <div className="recipe-box">
+                <AddRecipe addRecipe={this.props.addRecipe}/>
+                {this.props.recipeList.map((recipe, index) => <Recipe index={index} name={recipe.name} ingredients={recipe.ingredients} removeRecipe={this.props.removeRecipe} editRecipe={this.props.editRecipe}/>, this)}
+            </div>
+        )
+    }
+}
+
+class AddRecipe extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    addRecipeHelper(e) {
+        e.preventDefault();
+        this.props.addRecipe(this.name.value, this.ingredients.value)
+    }
+    render() {
+        return (
+            <div className="recipe recipe-add">
+                <form onSubmit={this.addRecipeHelper.bind(this)}>
+                    <div><textarea placeholder="Name" className="add-name" ref={(a) => this.name = a} /></div>
+                    <div><textarea placeholder="Ingredients, separated by a comma" className="add-ingredients" ref={(a) => this.ingredients = a} /></div>
+                    <div><button className="btn-add" type="submit" >Add</button></div>
+                </form>
+            </div>
+        )
+    }
+}
+
+class Recipe extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            canEdit: false
+        }
+    }
+    handleClickRemove(key) {
+        this.props.removeRecipe(this.props.index);
+    }
+    canBeEdited(){
+        if (!this.state.canEdit) {
+            this.setState({
+                canEdit: true
+            })
+        }else {
+            this.setState({
+                canEdit: false
+            })
+        }
+    }
+    handleClickEdit(e) {
+        e.preventDefault();
+        this.props.editRecipe(this.name.value, this.ingredients.value, this.props.index);
+        this.canBeEdited();
+    }
+    render() {
+            if (!this.state.canEdit) {
+                return (
+            <div className="recipe">
+                <div className="recipe-inner">
+                    <h2>{this.props.name}</h2>
+                    {this.props.ingredients.map(function(ingredient, number){
+                        return <div className="ingredient">{ingredient}</div>
+                    })}
+                </div>
+                <div className="btn-box">
+                    <div className="btn-edit" onClick={this.canBeEdited.bind(this)}>Edit</div>
+                    <div className="btn-remove" onClick={this.handleClickRemove.bind(this)}>Remove</div>
+                </div>
+            </div>
+                    )
+        } else {
+            return (
+                <div className="recipe recipe-add">
+                    <form onSubmit="">
+                    <div><textarea className="add-name" ref={(a) => this.name = a}>{this.props.name}</textarea></div>
+                    <div><textarea className="add-ingredients" ref={(a) => this.ingredients = a}>{this.props.ingredients}</textarea></div>
+                    <div className="btn-box">
+                    <div className="btn-edit" onClick={this.handleClickEdit.bind(this)}>Edit</div>
+                    <div className="btn-remove" onClick={this.handleClickRemove.bind(this)}>Remove</div>
+                    </div>
+                    </form>
+                </div>
+                )
+        }
+    }
+}
+
+class Footer extends React.Component {
+    render() {
+        return (
+            <footer>
+                by maci01
+            </footer>
+        )
+    }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'))
